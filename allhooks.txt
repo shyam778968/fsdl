@@ -1,0 +1,45 @@
+import React, { useState, useEffect, useRef } from "react";
+
+function App() {
+  // 🔹 useState - to change color when clicked
+  const [color, setColor] = useState("lightblue");
+
+  // 🔹 useEffect - to update timer every second
+  const [time, setTime] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => setTime((t) => t + 1), 1000);
+    return () => clearInterval(timer); // cleanup on unmount
+  }, []);
+
+  // 🔹 useRef - to access input directly
+  const inputRef = useRef(null);
+
+  // 🔹 useEffect - to focus input automatically when component loads
+  useEffect(() => {
+    inputRef.current.focus(); // focus input on page load
+  }, []);
+
+  return (
+    <div>
+      <h2>React Hooks Example (useState, useEffect, useRef)</h2>
+
+      {/* useState Example */}
+      <div
+        style={{ backgroundColor: color, padding: "10px", margin: "10px" }}
+        onClick={() =>
+          setColor(color === "lightblue" ? "lightcoral" : "lightblue")
+        }
+      >
+        Click me to change color (useState)
+      </div>
+
+      {/* useEffect Example */}
+      <p>Timer using useEffect: {time} seconds</p>
+
+      {/* useRef Example - Input auto focuses on load */}
+      <input ref={inputRef} type="text" placeholder="Input auto-focused" />
+    </div>
+  );
+}
+
+export default App;
