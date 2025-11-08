@@ -1,0 +1,83 @@
+sync---------------
+const fs = require('fs');
+
+  // a. Create and write data
+  fs.writeFileSync('data.txt', 'Hello, this is synchronous file operation.\n');
+  console.log('File created and written successfully.');
+
+  // b. Append data
+  fs.appendFileSync('data.txt', 'Appending more data synchronously.\n');
+  console.log('Data appended.');
+
+  // c. Read content
+  const content = fs.readFileSync('data.txt', 'utf8');
+  console.log('File Content:\n', content);
+
+  // d. Delete file
+  fs.unlinkSync('data.txt');
+  console.log('File deleted.');
+-----------------------------------------------------------------------------
+async---------------------------------------------------------------------------
+const fs = require('fs');
+
+// a. Write data asynchronously
+fs.writeFile('data.txt', 'Hello, this is asynchronous file operation.\n', (err) => {
+  if (err) throw err;
+  console.log('File created and written successfully.');
+
+  // b. Append data
+  fs.appendFile('data.txt', 'Appending more data asynchronously.\n', (err) => {
+    if (err) throw err;
+    console.log('Data appended.');
+
+    // c. Read data
+    fs.readFile('data.txt', 'utf8', (err, data) => {
+      if (err) throw err;
+      console.log('File Content:\n', data);
+
+      // d. Delete file
+      fs.unlink('data.txt', (err) => {
+        if (err) throw err;
+        console.log('File deleted.');
+      });
+    });
+  });
+});
+----------------------------------------------------------------------------
+stream------------------------------------------------------
+const fs = require('fs');
+
+const readble= fs.createReadStream('cipher.txt','utf-8');
+const writable = fs.createWriteStream('coutput.txt');
+
+readble.pipe(writable);
+readble.on('data',(chunk)=>{
+    console.log('reading chunk',chunk)
+    console.log('reading chunk',chunk.length,'bytes');
+
+})
+readble.on('end',()=>{
+    console.log('data succesfully streajed ')
+})
+----------------------------------------------------------------------------
+buffer-----------------------------------------------------------------------
+// a. Create Buffer from string
+const buf1 = Buffer.from('Hello World');
+
+console.log('Raw Buffer:', buf1);
+console.log('String Format:', buf1.toString());
+console.log('JSON Format:', buf1.toJSON());
+
+// b. Create empty buffer of size 10 and fill
+const buf2 = Buffer.alloc(10);
+buf2.fill(65); // ASCII for 'A'
+console.log('Filled Buffer:', buf2.toString());
+
+// c. Modify buffer content
+buf1[0] = 72; // ASCII for 'H'
+console.log('Modified Buffer:', buf1.toString());
+
+// d. Concatenate two buffers
+const combined = Buffer.concat([buf1, buf2]);
+console.log('Concatenated Buffer:', combined.toString());
+----------------------------------------------------------------------------------
