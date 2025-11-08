@@ -1,0 +1,35 @@
+students.json------------------------------------------------
+[
+  { "id": 1, "name": "Alice", "rollNo": "101", "department": "Computer Science" },
+  { "id": 2, "name": "Bob", "rollNo": "102", "department": "Mechanical" },
+  { "id": 3, "name": "Charlie", "rollNo": "103", "department": "Electrical" }
+]
+-----------------------------------------------------
+StudentListjson.jsx
+import React, { useEffect, useState } from "react";
+
+function StudentListjson() {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    fetch("/students.json") // file should be in public/ folder
+      .then((res) => res.json())
+      .then((data) => setStudents(data));
+  }, []);
+
+  return (
+    <div>
+      <h2>Student Records</h2>
+      <ul>
+        {students.map((student) => (
+          <li key={student.id}>
+            {student.name} — Roll No: {student.rollNo}, Dept: {student.department}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default StudentListjson;
+------------------------------------------------------------------------------------

@@ -1,0 +1,25 @@
+import React, { useState, useEffect } from "react";
+
+function Clock() {
+  // Step 1: Create a state variable to store current time
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+
+  // Step 2: useEffect to update time every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    // Step 3: Cleanup the timer when component unmounts
+    return () => clearInterval(timer);
+  }, []); // Empty array → run once when component mounts
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>Current Time</h2>
+      <h1>{time}</h1>
+    </div>
+  );
+}
+
+export default Clock;

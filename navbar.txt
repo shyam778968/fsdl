@@ -1,0 +1,44 @@
+Navbar.jsx--------------------------------------------
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
+
+function Navbar() {
+  return (
+    <nav className="navbar">
+      <Link to="/" className="nav-link">Home</Link>
+      <Link to="/about" className="nav-link">About</Link>
+      <Link to="/contact" className="nav-link">Contact</Link>
+      <Link to="/form" className="nav-link">Form</Link>
+      <Link to="/focus" className="nav-link">Focus</Link>
+      <Link to="/tasklist" className="nav-link">Tasklist</Link>
+      <Link to="/clock" className="nav-link">clock</Link>
+      <Link to="/jsonpass" className="nav-link">json</Link>
+
+
+
+    </nav>
+  );
+}
+
+export default Navbar;
+--------------------------------------------
+NavBar.css
+.navbar {
+  background-color: #f4f4f4;
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.nav-link {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+

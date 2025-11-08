@@ -1,0 +1,50 @@
+TaskList.jsx
+
+import React, { useState } from "react";
+
+function TaskList() {
+  // State for the input and the list of tasks
+  const [task, setTask] = useState("");        // stores current input text
+  const [tasks, setTasks] = useState([]);      // stores list of all tasks
+
+  // Handle form submission
+  const handleAddTask = (e) => {
+    e.preventDefault(); // stop page reload
+
+    // Add new task only if input is not empty
+    if (task.trim() !== "") {
+      setTasks([...tasks, task]); // add task to array
+      setTask("");                // clear the input field
+    }
+  };
+
+  return (
+    <div style={{ width: "300px", margin: "40px auto", textAlign: "center" }}>
+      <h2>Task List</h2>
+
+      {/* Input form */}
+      <form onSubmit={handleAddTask}>
+        <input
+          type="text"
+          value={task}
+          placeholder="Enter a new task"
+          onChange={(e) => setTask(e.target.value)}
+          style={{ padding: "8px", width: "80%", marginBottom: "10px" }}
+        />
+        <br />
+        <button type="submit" style={{ padding: "8px 16px" }}>
+          Add Task
+        </button>
+      </form>
+
+      {/* Display the tasks */}
+      <ul style={{ textAlign: "left", marginTop: "20px" }}>
+        {tasks.map((t, index) => (
+          <li key={index}>{t}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default TaskList;

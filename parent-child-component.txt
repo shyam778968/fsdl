@@ -1,0 +1,69 @@
+Employee.jsx----------------------------------------------------------
+
+
+import React from "react";
+import "./Employee.css";
+
+
+// Employee is a reusable card component that receives props
+function Employee({ name, id, dept}) {
+  return (
+    <div className="emp-card">
+      <h3 className="emp-name">{name}</h3>
+      <p>ID: <strong>{id}</strong></p>
+      <p>Department: <em>{dept}</em></p>
+    </div>
+  );
+}
+export default Employee;
+----------------------------------------------------------------------
+Employee.css
+
+
+/* simple card styling */
+.emp-card {
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  width: 200px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  margin: 8px;
+}
+.emp-name { margin: 0 0 8px 0; }
+----------------------------------------------------------------------------
+App.jsx----------------------------------------------------
+import React from "react";
+import Employee from "./components/Employee";
+
+
+function App() {
+  // parent holds employee data
+  const employees = [
+    { name: "Purva ", id: "E101", dept: "IT" },
+    { name: "Tej Mehta",   id: "E102", dept: "DevOps" },
+    { name: "Avi Patel",   id: "E103", dept: "QA" }
+  ];
+
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h2>Employee Directory</h2>
+
+
+      {/* render cards dynamically using map */}
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {employees.map((emp) => (
+          <Employee
+            key={emp.id}          // unique key for list rendering
+            name={emp.name}
+            id={emp.id}
+            dept={emp.dept}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+export default App;

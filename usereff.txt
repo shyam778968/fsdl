@@ -1,0 +1,28 @@
+Focus.jsx
+
+
+import React, { useRef, useEffect } from "react";
+
+function Focus() {
+  // Step 1: Create a reference for the input element
+  const inputRef = useRef(null);
+
+  // Step 2: Focus the input box when the component loads
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>Auto Focus Input Example</h2>
+      <input
+        type="text"
+        ref={inputRef} // Step 3: Attach the ref to the input
+        placeholder="Type here..."
+        style={{ padding: "10px", width: "200px" }}
+      />
+    </div>
+  );
+}
+
+export default Focus;

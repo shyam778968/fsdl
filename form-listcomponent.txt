@@ -1,0 +1,198 @@
+Form.jsx------------------------------------------------------------
+import React, { useState } from "react";
+import "./Form.css";
+import StudentList from "./StudentList"; 
+
+function Form() {
+  // State variables to store input values
+  const [name, setName] = useState("");
+  const [rollNo, setRollNo] = useState("");
+  const [department, setDepartment] = useState("");
+
+  // State to store the list of all students
+  const [students, setStudents] = useState([]);
+
+  // Function runs when the form is submitted
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent page reload
+
+    // Create a new student record object
+    const newStudent = {
+      name,
+      rollNo,
+      department,
+    };
+
+    // Add the new student to the existing list
+    setStudents([...students, newStudent]);
+
+    // Clear all input fields after submission
+    setName("");
+    setRollNo("");
+    setDepartment("");
+  };
+
+  return (
+    <div className="form-container">
+      <h2>Add New Student</h2>
+
+      {/* Student input form */}
+      <form onSubmit={handleSubmit} className="student-form">
+        <div className="form-group">
+          <label>Name:</label>
+          <input
+            type="text"
+            value={name}
+            placeholder="Enter student name"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Roll No:</label>
+          <input
+            type="text"
+            value={rollNo}
+            placeholder="Enter roll number"
+            onChange={(e) => setRollNo(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Department:</label>
+          <input
+            type="text"
+            value={department}
+            placeholder="Enter department"
+            onChange={(e) => setDepartment(e.target.value)}
+            required
+          />
+        </div>
+
+        <button type="submit" className="btn-submit">
+          Add Student
+        </button>
+      </form>
+
+      <h3>Student Records</h3>
+
+      {/* Pass the list of students as a prop to StudentList */}
+      <StudentList students={students} />
+    </div>
+  );
+}
+
+export default Form;
+---------------------------------------------------------------------
+Form.css 
+/* Page background and default text */
+body {
+  background-color: white;
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+/* Main container */
+.form-container {
+  width: 400px;
+  margin: 40px auto;
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h2, h3 {
+  text-align: center;
+  color: black;
+}
+
+/* Form styling */
+.student-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+}
+
+/* Button */
+.btn-submit {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+}
+
+/* Student List */
+.student-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.student-list li {
+  background: #f8f9fa;
+  color: black !important;  
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+------------------------------------------------------------
+StudentList.jsx
+import React from "react";
+import "./Form.css"; // Use the same styling
+
+function StudentList({ students }) {
+  // If there are no students
+  if (students.length === 0) {
+    return (
+      <ul className="student-list">
+        <li>No students added yet.</li>
+      </ul>
+    );
+  } 
+  // Otherwise (if students exist)
+  else {
+    return (
+      <ul className="student-list">
+        {students.map((student, index) => (
+          <li key={index}>
+            <strong>{student.name}</strong> — Roll No: {student.rollNo}, Dept: {student.department}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+}
+
+export default StudentList;
+

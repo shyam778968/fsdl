@@ -1,0 +1,91 @@
+import React from "react";
+import {Routes, Route } from "react-router-dom";
+import "./App.css";
+
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Form from "./components/Form";
+import TaskList from "./components/TaskList";
+import Focus from "./components/Focus";
+import Clock from "./components/Clock";
+import StudentListjson from "./components/StudentListjson";
+function App() {
+  const Home = () => (
+    <div className="page">
+      <h2>Welcome to the Home Page</h2>
+      <p>This is a React app with clean external CSS styling.</p>
+    </div>
+  );
+
+  const About = () => (
+    <div className="page">
+      <h2>About Us</h2>
+      <p>We build modular, reusable React components.</p>
+    </div>
+  );
+
+  const Contact = () => (
+    <div className="page">
+      <h2>Contact Us</h2>
+      <p>Reach out at contact@myreactsite.com</p>
+    </div>
+  );
+
+  return (
+      <div className="app-layout">
+        <Header />
+        <Navbar />
+
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/form" element={<Form />} />
+            <Route path="/focus" element={<Focus />} />
+            <Route path="/tasklist" element={<TaskList />} />
+            <Route path="/clock" element={<Clock />} />
+            <Route path="/jsonpass" element={<StudentListjson />} />
+
+
+            
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+  );
+}
+
+export default App;
+-------------------------------------------------------------------------------
+html, body, #root {
+  height: 100%;
+  width: 100%;     
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Layout wrapper */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;      
+}
+/* Main content area */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #000; 
+  background-color: #f9f9f9;
+}
